@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/teca-sbc-design-system-14f9fa62-ed17-4dc6-8921-07665d0fcc2a/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/teca-sbc-design-system-14f9fa62-ed17-4dc6-8921-07665d0fcc2a/tokens/colors.css">
+<link rel="stylesheet" href="_ds/teca-sbc-design-system-14f9fa62-ed17-4dc6-8921-07665d0fcc2a/tokens/typography.css">
+<link rel="stylesheet" href="_ds/teca-sbc-design-system-14f9fa62-ed17-4dc6-8921-07665d0fcc2a/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/teca-sbc-design-system-14f9fa62-ed17-4dc6-8921-07665d0fcc2a/tokens/base.css">
+<link rel="stylesheet" href="_ds/teca-sbc-design-system-14f9fa62-ed17-4dc6-8921-07665d0fcc2a/styles.css">
+<script src="_ds/teca-sbc-design-system-14f9fa62-ed17-4dc6-8921-07665d0fcc2a/_ds_bundle.js"></script>
+<style>
+  :root{
+    --accent-primary:#FA2E38;
+    --crimson-50:#2a0a0e; --crimson-100:#3a0e13;
+    --crimson-300:#ff6d74; --crimson-400:#FA2E38; --crimson-500:#FA2E38; --crimson-600:#e01e28;
+    --teal-200:#8fd6d9; --teal-300:#3fc0c6; --teal-400:#1FA6AD; --teal-500:#1FA6AD; --teal-600:#17868b;
+  }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; }
+  a { color: var(--teal-300); }
+  a:hover { color: var(--teal-200); }
+  @keyframes tecaGlow { 0%,100% { opacity:.35; transform:translateY(0) } 50% { opacity:.8; transform:translateY(-14px) } }
+  @keyframes tecaBlink { 0%,100% { opacity:1 } 50% { opacity:.15 } }
+  @keyframes glowPulse { 0%,100% { box-shadow:0 0 42px -10px rgba(250,46,56,.65), 0 0 0 1px rgba(250,46,56,.5) } 50% { box-shadow:0 0 68px 2px rgba(250,46,56,.95), 0 0 0 1px rgba(250,46,56,.75) } }
+  .teca-bg { background: transparent; }
+  @media (max-width: 768px) { .teca-bg { background: transparent; } }
+  @keyframes revealUp { from { opacity:0; transform:translateY(26px) } to { opacity:1; transform:translateY(0) } }
+  .rv-init { opacity:0; }
+  .rv-go { animation: revealUp .62s var(--ease-standard) both; }
+  #sitehdr { transition: background .3s var(--ease-standard), box-shadow .3s var(--ease-standard); }
+  #hdrbar { transition: height .3s var(--ease-standard); }
+  footer a.fnav { color: var(--text-inverse-muted); text-decoration:none; transition: color .2s var(--ease-standard); }
+  footer a.fnav:hover { color: var(--teal-300); }
+  @media (prefers-reduced-motion: reduce) { .rv-init{opacity:1 !important} .rv-go{animation:none !important} }
+</style>
+</helmet>
+<div id="top" style="overflow-x:hidden; background:#0b0607; font-family:var(--font-body); color:var(--text-inverse)">
+
+  <!-- persistent background: preto com glows vermelhos fracos -->
+  <div aria-hidden="true" style="position:fixed; inset:0; z-index:0; pointer-events:none; background:#0b0607">
+    <div style="position:absolute; bottom:-12%; right:-10%; width:80vw; height:80vw; max-width:920px; max-height:920px; background:radial-gradient(ellipse at bottom right, rgba(250,46,56,0.18) 0%, rgba(185,26,36,0.06) 42%, transparent 70%); filter:blur(60px)"></div>
+    <div style="position:absolute; top:-10%; left:-10%; width:60vw; height:60vw; max-width:680px; max-height:680px; background:radial-gradient(ellipse at top left, rgba(250,46,56,0.1) 0%, transparent 60%); filter:blur(70px)"></div>
+    <div style="position:absolute; top:44%; left:50%; width:54vw; height:54vw; max-width:660px; max-height:660px; transform:translate(-50%,-50%); background:radial-gradient(circle, rgba(250,46,56,0.05) 0%, transparent 66%); filter:blur(70px)"></div>
+  </div>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header id="sitehdr" style="position:sticky; top:0; z-index:50; background:rgba(22,11,12,0.78); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid rgba(255,255,255,0.08)">
+    <div id="hdrbar" style="max-width:1160px; margin:0 auto; height:74px; display:flex; align-items:center; justify-content:space-between; padding:0 var(--space-6)">
+      <a href="#top" style="display:flex; align-items:center; text-decoration:none"><img src="assets/teca-logo-branca.png" alt="TECA SBC" style="height:30px; width:auto"></a>
+      <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; align-items:center; gap:var(--space-8)">
+          <nav style="display:flex; gap:var(--space-6); align-items:center">
+            <a href="#sobre" style="font-size:var(--text-body-sm); font-weight:500; color:var(--text-inverse-muted); text-decoration:none" style-hover="color:var(--teal-300)">O Curso</a>
+            <a href="#metodologia" style="font-size:var(--text-body-sm); font-weight:500; color:var(--text-inverse-muted); text-decoration:none" style-hover="color:var(--teal-300)">Metodologia</a>
+            <a href="#professores" style="font-size:var(--text-body-sm); font-weight:500; color:var(--text-inverse-muted); text-decoration:none" style-hover="color:var(--teal-300)">Professores</a>
+            <a href="#faq" style="font-size:var(--text-body-sm); font-weight:500; color:var(--text-inverse-muted); text-decoration:none" style-hover="color:var(--teal-300)">FAQ</a>
+          </nav>
+          <a href="#precos" style="display:inline-flex; align-items:center; height:40px; padding:0 var(--space-5); border-radius:var(--radius-md); background:var(--accent-primary); color:#fff; font-weight:600; font-size:var(--text-body-sm); text-decoration:none; box-shadow:0 0 28px -8px rgba(250,46,56,0.8); transition:all var(--duration-fast) var(--ease-standard)" style-hover="background:#e01e28; box-shadow:0 0 40px -4px rgba(250,46,56,0.95)">Garantir Vaga</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMobile }}" aria-label="Menu" style="display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; background:transparent; border:none; color:var(--text-inverse); cursor:pointer">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </sc-if>
+    </div>
+    <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="background:rgba(22,11,12,0.97); border-bottom:1px solid rgba(255,255,255,0.08); padding:var(--space-4) var(--space-6); display:flex; flex-direction:column; gap:var(--space-3)">
+        <a href="#sobre" onClick="{{ closeMobile }}" style="font-size:var(--text-body-md); color:var(--text-inverse-muted); text-decoration:none; padding:var(--space-2) 0">O Curso</a>
+        <a href="#metodologia" onClick="{{ closeMobile }}" style="font-size:var(--text-body-md); color:var(--text-inverse-muted); text-decoration:none; padding:var(--space-2) 0">Metodologia</a>
+        <a href="#professores" onClick="{{ closeMobile }}" style="font-size:var(--text-body-md); color:var(--text-inverse-muted); text-decoration:none; padding:var(--space-2) 0">Professores</a>
+        <a href="#faq" onClick="{{ closeMobile }}" style="font-size:var(--text-body-md); color:var(--text-inverse-muted); text-decoration:none; padding:var(--space-2) 0">FAQ</a>
+        <a href="#precos" onClick="{{ closeMobile }}" style="display:inline-flex; align-items:center; justify-content:center; height:44px; border-radius:var(--radius-md); background:var(--accent-primary); color:#fff; font-weight:600; text-decoration:none">Garantir Vaga</a>
+      </div>
+    </sc-if>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="teca-bg" style="position:relative; overflow:hidden">
+    <div style="position:relative; z-index:2; max-width:960px; margin:0 auto; padding:var(--space-24) var(--space-6) var(--space-20); text-align:center">
+      <div style="display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:var(--radius-full); background:rgba(42,172,176,0.1); border:1px solid rgba(42,172,176,0.35); box-shadow:0 0 30px -12px rgba(42,172,176,0.8); margin-bottom:var(--space-6)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--crimson-400)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 4px rgba(250,46,56,0.9))"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span style="font-size:var(--text-caption); color:var(--teal-200); text-transform:uppercase; letter-spacing:var(--tracking-label-caps); font-weight:600">TECA SBC — Emergências Cardiovasculares</span>
+      </div>
+      <h1 style="font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-display-caps); line-height:var(--leading-heading); font-size:clamp(2.1rem, 5vw, var(--text-display-lg)); color:var(--text-inverse); margin:0 0 var(--space-5); text-shadow:0 2px 40px rgba(0,0,0,0.5)">
+        Profissional de saúde, o que você faz quando um paciente entra em <span style="color:var(--crimson-400); text-shadow:0 0 28px rgba(250,46,56,0.7)">PCR?</span><span style="color:var(--crimson-400); animation:tecaBlink 1.1s step-end infinite">_</span>
+      </h1>
+      <p style="font-size:var(--text-body-lg); color:var(--text-inverse-muted); max-width:680px; margin:0 auto var(--space-8); line-height:var(--leading-body)">
+        Domine os protocolos de emergências cardiovasculares passo a passo, atue com confiança e <strong style="color:var(--text-inverse); font-weight:600">salve mais vidas com segurança.</strong>
+      </p>
+      <svg width="100%" height="34" viewBox="0 0 600 34" preserveAspectRatio="none" style="max-width:460px; margin:0 auto var(--space-10); display:block; filter:drop-shadow(0 0 6px rgba(42,172,176,0.85))">
+        <polyline points="0,17 190,17 205,17 214,5 228,29 240,17 262,17 288,17 304,3 320,31 334,17 600,17" fill="none" stroke="var(--teal-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div style="position:relative; width:100%; max-width:340px; margin:0 auto var(--space-10)">
+        <div style="position:absolute; inset:-14px; border-radius:calc(var(--radius-lg) + 14px); background:radial-gradient(circle at 50% 40%, rgba(42,172,176,0.35), transparent 70%); filter:blur(26px)"></div>
+        <div style="position:relative; aspect-ratio:9/16; border-radius:var(--radius-lg); overflow:hidden; border:1px solid rgba(42,172,176,0.4); box-shadow:0 0 60px -10px rgba(42,172,176,0.7), var(--shadow-lg); background:#000">
+          <iframe style="width:100%; height:100%; border:0" src="https://player.vimeo.com/video/1179200049?autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0&background=0" title="VSL" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:var(--space-4)">
+        <a href="#precos" style="display:inline-flex; align-items:center; gap:10px; height:56px; padding:0 var(--space-8); border-radius:var(--radius-md); background:var(--accent-primary); color:#fff; font-weight:700; font-size:var(--text-body-md); text-decoration:none; text-transform:uppercase; letter-spacing:0.03em; animation:glowPulse 3s ease-in-out infinite; transition:background var(--duration-fast) var(--ease-standard)" style-hover="background:#e01e28">
+          Inscreva-se aqui e atue com segurança
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p style="font-size:var(--text-caption); color:var(--text-inverse-muted); display:flex; align-items:center; gap:6px; margin:0">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Vagas limitadas • Garantia de 7 dias
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PAIN POINTS ===================== -->
+  <section id="sobre" style="position:relative; overflow:hidden; padding:var(--space-20) var(--space-6)">
+    <div style="position:relative; z-index:2; max-width:960px; margin:0 auto">
+      <div style="text-align:center; margin-bottom:var(--space-10)">
+        <h2 style="font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-display-caps); line-height:var(--leading-heading); font-size:clamp(1.8rem,4vw,var(--text-display-md)); color:var(--text-inverse); margin:0 0 var(--space-3)">Seja honesto(a) <span style="color:var(--teal-300); text-shadow:0 0 26px rgba(42,172,176,0.6)">consigo mesmo.</span></h2>
+        <p style="color:var(--teal-300); font-weight:600; font-size:var(--text-body-lg); margin:0">Quantas vezes você:</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:var(--space-4); margin-bottom:var(--space-10)">
+        <sc-for list="{{ painPoints }}" as="pain" hint-placeholder-count="6">
+          <div style="background:linear-gradient(160deg, rgba(255,255,255,0.055), rgba(255,255,255,0.015)); border:1px solid rgba(250,46,56,0.22); border-radius:var(--radius-lg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 20px 50px -30px rgba(0,0,0,0.8), 0 0 40px -22px rgba(250,46,56,0.5), inset 0 1px 0 rgba(255,255,255,0.06); padding:var(--space-5); display:flex; align-items:flex-start; gap:var(--space-3)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--crimson-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px; filter:drop-shadow(0 0 5px rgba(250,46,56,0.7))"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>
+            <span style="color:var(--text-inverse-muted); font-size:var(--text-body-sm); line-height:var(--leading-body)">{{ pain }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="text-align:center">
+        <div style="display:inline-block; background:linear-gradient(160deg, rgba(42,172,176,0.12), rgba(42,172,176,0.04)); border:1px solid rgba(42,172,176,0.4); border-radius:var(--radius-lg); box-shadow:0 0 44px -18px rgba(42,172,176,0.7); padding:var(--space-4) var(--space-8); margin-bottom:var(--space-8)">
+          <p style="margin:0; color:var(--text-inverse)">O problema é <span style="color:var(--teal-300); font-weight:700; text-shadow:0 0 22px rgba(42,172,176,0.6)">falta de treinamento prático</span> — mas agora isso acaba.</p>
+        </div>
+        <div>
+          <a href="#precos" style="display:inline-flex; align-items:center; gap:10px; height:52px; padding:0 var(--space-6); border-radius:var(--radius-md); background:var(--accent-primary); color:#fff; font-weight:700; font-size:var(--text-body-md); text-decoration:none; text-transform:uppercase; letter-spacing:0.03em; box-shadow:0 0 40px -10px rgba(250,46,56,0.7); transition:all var(--duration-fast) var(--ease-standard)" style-hover="background:#e01e28; box-shadow:0 0 56px -4px rgba(250,46,56,0.9)">
+            Inscreva-se aqui e atue com segurança
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROFESSORS ===================== -->
+  <section id="professores" class="teca-bg" style="position:relative; overflow:hidden; padding:var(--space-20) var(--space-6)">
+    <div style="position:relative; z-index:2; max-width:1160px; margin:0 auto">
+      <div style="text-align:center; margin-bottom:var(--space-12)">
+        <span style="display:inline-block; color:var(--teal-300); font-size:var(--text-caption); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-label-caps); margin-bottom:var(--space-3)">Instrutores</span>
+        <h2 style="font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-display-caps); line-height:var(--leading-heading); font-size:clamp(1.8rem,4vw,var(--text-display-md)); color:var(--text-inverse); margin:0 0 var(--space-4)">Aprenda com quem vive a <span style="color:var(--teal-300); text-shadow:0 0 26px rgba(42,172,176,0.6)">emergência todos os dias</span></h2>
+        <p style="color:var(--text-inverse-muted); font-size:var(--text-body-lg); max-width:640px; margin:0 auto">Cardiologistas e intensivistas com experiência real em pronto-socorro, UTI e emergências cardiovasculares.</p>
+      </div>
+
+      <div style="position:relative; padding:0 var(--space-8)">
+        <div style="overflow:hidden">
+          <div style="display:flex; gap:24px; transition:transform var(--duration-slow) var(--ease-emphasis); transform: {{ trackTransform }}">
+            <sc-for list="{{ professors }}" as="prof" hint-placeholder-count="3">
+              <div style="{{ prof.style }}">
+                <div style="background:linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015)); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius-lg); overflow:hidden; height:100%; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 24px 60px -34px rgba(0,0,0,0.9), 0 0 44px -26px rgba(42,172,176,0.5)">
+                  <div style="position:relative; height:230px; overflow:hidden">
+                    <img src="{{ prof.img }}" alt="{{ prof.name }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:{{ prof.pos }}">
+                    <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(20,10,11,0.98) 2%, transparent 48%)"></div>
+                  </div>
+                  <div style="padding:var(--space-6); margin-top:-28px; position:relative; z-index:2">
+                    <div style="display:flex; align-items:center; gap:6px; margin-bottom:var(--space-2); flex-wrap:wrap">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal-300)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; filter:drop-shadow(0 0 4px rgba(42,172,176,0.7))"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1 2.5 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg>
+                      <span style="font-size:var(--text-caption); color:var(--teal-300); font-weight:600; text-transform:uppercase; letter-spacing:var(--tracking-label-caps); line-height:1.3">{{ prof.role }}</span>
+                    </div>
+                    <h3 style="font-family:var(--font-display); font-weight:700; font-size:var(--text-heading-sm); color:var(--text-inverse); margin:0 0 var(--space-2); line-height:var(--leading-heading)">{{ prof.name }}</h3>
+                    <p style="font-size:var(--text-body-sm); color:var(--text-inverse-muted); line-height:var(--leading-body); margin:0">{{ prof.cred }}</p>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <button onClick="{{ prev }}" aria-label="Anterior" style="position:absolute; left:-4px; top:100px; width:44px; height:44px; border-radius:999px; background:rgba(30,15,16,0.9); border:1px solid rgba(42,172,176,0.4); display:flex; align-items:center; justify-content:center; color:var(--text-inverse); cursor:pointer; backdrop-filter:blur(8px); box-shadow:0 0 24px -8px rgba(42,172,176,0.6); transition:all var(--duration-fast) var(--ease-standard)" style-hover="border-color:var(--teal-300); color:var(--teal-300); box-shadow:0 0 36px -4px rgba(42,172,176,0.9)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button onClick="{{ next }}" aria-label="Próximo" style="position:absolute; right:-4px; top:100px; width:44px; height:44px; border-radius:999px; background:rgba(30,15,16,0.9); border:1px solid rgba(42,172,176,0.4); display:flex; align-items:center; justify-content:center; color:var(--text-inverse); cursor:pointer; backdrop-filter:blur(8px); box-shadow:0 0 24px -8px rgba(42,172,176,0.6); transition:all var(--duration-fast) var(--ease-standard)" style-hover="border-color:var(--teal-300); color:var(--teal-300); box-shadow:0 0 36px -4px rgba(42,172,176,0.9)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div style="display:flex; justify-content:center; gap:8px; margin-top:var(--space-8)">
+        <sc-for list="{{ dots }}" as="dot" hint-placeholder-count="6">
+          <button onClick="{{ dot.onClick }}" aria-label="Ir para slide" style="{{ dot.style }}"></button>
+        </sc-for>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:var(--space-6); margin-top:var(--space-16)">
+        <sc-for list="{{ stats }}" as="stat" hint-placeholder-count="4">
+          <div style="text-align:center; background:linear-gradient(160deg, rgba(42,172,176,0.1), rgba(255,255,255,0.015)); border:1px solid rgba(42,172,176,0.28); border-radius:var(--radius-lg); padding:var(--space-6); box-shadow:0 0 40px -24px rgba(42,172,176,0.7)">
+            <div style="font-family:var(--font-display); font-weight:700; font-size:clamp(1.8rem,3vw,2.4rem); color:var(--teal-300); margin-bottom:4px; font-variant-numeric:tabular-nums; text-shadow:0 0 24px rgba(42,172,176,0.6)">{{ stat.value }}</div>
+            <div style="font-size:var(--text-body-sm); color:var(--text-inverse-muted)">{{ stat.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex; justify-content:center; margin-top:var(--space-10)">
+        <a href="#precos" style="display:inline-flex; align-items:center; gap:10px; height:52px; padding:0 var(--space-6); border-radius:var(--radius-md); background:var(--accent-primary); color:#fff; font-weight:700; font-size:var(--text-body-md); text-decoration:none; text-transform:uppercase; letter-spacing:0.03em; box-shadow:0 0 40px -10px rgba(250,46,56,0.7); transition:all var(--duration-fast) var(--ease-standard)" style-hover="background:#e01e28; box-shadow:0 0 56px -4px rgba(250,46,56,0.9)">
+          Inscreva-se aqui e atue com segurança
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AGITATION ===================== -->
+  <section style="position:relative; overflow:hidden; padding:var(--space-20) var(--space-6)">
+    <div style="position:relative; z-index:2; max-width:960px; margin:0 auto">
+      <div style="text-align:center; margin-bottom:var(--space-12)">
+        <h2 style="font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-display-caps); line-height:var(--leading-heading); font-size:clamp(1.8rem,4vw,var(--text-display-md)); color:var(--text-inverse); margin:0">Emergências sem treinamento geram <span style="color:var(--crimson-400); text-shadow:0 0 28px rgba(250,46,56,0.7)">consequências irreversíveis</span></h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:var(--space-6); margin-bottom:var(--space-10)">
+        <sc-for list="{{ consequences }}" as="c" hint-placeholder-count="3">
+          <div style="background:linear-gradient(160deg, rgba(255,255,255,0.055), rgba(255,255,255,0.015)); border:1px solid rgba(250,46,56,0.28); border-radius:var(--radius-lg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 20px 50px -30px rgba(0,0,0,0.8), 0 0 44px -22px rgba(250,46,56,0.5); padding:var(--space-6); text-align:center">
+            <div style="width:44px; height:44px; border-radius:999px; background:rgba(250,46,56,0.16); border:1px solid rgba(250,46,56,0.4); display:flex; align-items:center; justify-content:center; margin:0 auto var(--space-4); box-shadow:0 0 24px -6px rgba(250,46,56,0.7)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--crimson-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>
+            </div>
+            <p style="font-family:var(--font-display); font-weight:700; font-size:var(--text-heading-sm); margin:0 0 4px; color:var(--text-inverse)">{{ c.label }}</p>
+            <p style="font-size:var(--text-body-sm); color:var(--text-inverse-muted); margin:0">{{ c.sub }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background:linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius-lg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 20px 50px -30px rgba(0,0,0,0.8); padding:var(--space-8)">
+        <p style="text-align:center; color:var(--text-inverse-muted); line-height:var(--leading-body); margin:0">Cada vez que você trava numa emergência por insegurança, <strong style="color:var(--text-inverse); font-weight:600">ela se torna um momento que não volta — a assistência ao paciente e a taxa de sucesso ficam comprometidos.</strong></p>
+        <p style="text-align:center; color:var(--teal-300); font-weight:600; margin:var(--space-4) 0 0; text-shadow:0 0 20px rgba(42,172,176,0.5)">O treinamento sistematizado salva vidas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BEFORE / AFTER ===================== -->
+  <section class="teca-bg" style="position:relative; overflow:hidden; padding:var(--space-20) var(--space-6)">
+    <div style="position:relative; z-index:2; max-width:960px; margin:0 auto">
+      <div style="text-align:center; margin-bottom:var(--space-8)">
+        <span style="display:inline-block; padding:6px 14px; border-radius:var(--radius-full); background:rgba(42,172,176,0.14); border:1px solid rgba(42,172,176,0.4); color:var(--teal-200); font-size:var(--text-caption); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-label-caps); box-shadow:0 0 30px -12px rgba(42,172,176,0.8)">MedSafe Brasil · TECA</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:var(--space-6); margin-bottom:var(--space-8)">
+        <div style="background:linear-gradient(160deg, rgba(250,46,56,0.12), rgba(255,255,255,0.01)); border:1px solid rgba(250,46,56,0.35); border-radius:var(--radius-lg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 0 48px -24px rgba(250,46,56,0.6); padding:var(--space-8)">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:var(--space-6)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--crimson-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 5px rgba(250,46,56,0.7))"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>
+            <h3 style="font-family:var(--font-display); font-weight:700; font-size:var(--text-heading-md); color:var(--crimson-300); margin:0">Antes do TECA</h3>
+          </div>
+          <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:var(--space-3)">
+            <sc-for list="{{ before }}" as="b" hint-placeholder-count="6">
+              <li style="display:flex; align-items:flex-start; gap:var(--space-3); font-size:var(--text-body-sm); color:var(--text-inverse-muted)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--crimson-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:3px"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>
+                {{ b }}
+              </li>
+            </sc-for>
+          </ul>
+        </div>
+        <div style="background:linear-gradient(160deg, rgba(42,172,176,0.12), rgba(255,255,255,0.01)); border:1px solid rgba(42,172,176,0.4); border-radius:var(--radius-lg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 0 48px -22px rgba(42,172,176,0.65); padding:var(--space-8)">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:var(--space-6)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-300)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 5px rgba(42,172,176,0.7))"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+            <h3 style="font-family:var(--font-display); font-weight:700; font-size:var(--text-heading-md); color:var(--teal-300); margin:0">Depois do TECA</h3>
+          </div>
+          <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:var(--space-3)">
+            <sc-for list="{{ after }}" as="a" hint-placeholder-count="6">
+              <li style="display:flex; align-items:flex-start; gap:var(--space-3); font-size:var(--text-body-sm); color:var(--text-inverse)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal-300)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:3px; filter:drop-shadow(0 0 4px rgba(42,172,176,0.6))"><path d="M20 6 9 17l-5-5"/></svg>
+                {{ a }}
+              </li>
+            </sc-for>
+          </ul>
+        </div>
+      </div>
+      <p style="text-align:center; color:var(--text-inverse-muted); margin:0 0 var(--space-8)">Essa é a diferença entre <strong style="color:var(--crimson-300)">improviso</strong> e <strong style="color:var(--teal-300)">atuação profissional.</strong></p>
+      <div style="display:flex; justify-content:center">
+        <a href="#precos" style="display:inline-flex; align-items:center; gap:10px; height:52px; padding:0 var(--space-6); border-radius:var(--radius-md); background:var(--accent-primary); color:#fff; font-weight:700; font-size:var(--text-body-md); text-decoration:none; box-shadow:0 0 40px -10px rgba(250,46,56,0.7); transition:all var(--duration-fast) var(--ease-standard)" style-hover="background:#e01e28; box-shadow:0 0 56px -4px rgba(250,46,56,0.9)">
+          Quero atuar como um especialista
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MODULES ===================== -->
+  <section id="metodologia" style="position:relative; overflow:hidden; padding:var(--space-20) var(--space-6)">
+    <div style="position:relative; z-index:2; max-width:1080px; margin:0 auto">
+      <div style="text-align:center; margin-bottom:var(--space-12)">
+        <span style="display:inline-block; color:var(--teal-300); font-size:var(--text-caption); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-label-caps); margin-bottom:var(--space-3)">Conteúdo programático</span>
+        <h2 style="font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-display-caps); line-height:var(--leading-heading); font-size:clamp(1.8rem,4vw,var(--text-display-md)); color:var(--text-inverse); margin:0 0 var(--space-4)">A jornada do <span style="color:var(--teal-300); text-shadow:0 0 26px rgba(42,172,176,0.6)">treinamento TECA</span></h2>
+        <p style="color:var(--text-inverse-muted); font-size:var(--text-body-lg); max-width:600px; margin:0 auto">Cada módulo tem objetivo claro, protocolo definido e simulação prática.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:var(--space-4); margin-bottom:var(--space-10)">
+        <sc-for list="{{ modules }}" as="mod" hint-placeholder-count="8">
+          <div style="background:linear-gradient(160deg, rgba(255,255,255,0.055), rgba(255,255,255,0.012)); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius-lg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 20px 50px -32px rgba(0,0,0,0.85); padding:var(--space-5); transition:all var(--duration-fast) var(--ease-standard)" style-hover="border-color:rgba(42,172,176,0.5); box-shadow:0 0 44px -18px rgba(42,172,176,0.7)">
+            <span style="font-family:var(--font-display); font-weight:700; font-size:1.75rem; color:var(--teal-300); display:block; margin-bottom:var(--space-2); font-variant-numeric:tabular-nums; text-shadow:0 0 20px rgba(42,172,176,0.5)">{{ mod.num }}</span>
+            <p style="font-family:var(--font-display); font-weight:600; font-size:var(--text-body-md); margin:0 0 4px; color:var(--text-inverse)">{{ mod.title }}</p>
+            <p style="font-size:var(--text-body-sm); color:var(--text-inverse-muted); line-height:var(--leading-body); margin:0">{{ mod.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <p style="text-align:center; color:var(--teal-300); font-weight:600; margin:0; text-shadow:0 0 20px rgba(42,172,176,0.5)">Cada etapa com protocolo definido, critério clínico e simulação prática.</p>
+    </div>
+  </section>
+
+  <!-- ===================== CREDENTIAL ===================== -->
+  <section class="teca-bg" style="position:relative; overflow:hidden; padding:var(--space-20) var(--space-6)">
+    <div style="position:relative; z-index:2; max-width:900px; margin:0 auto">
+      <div style="text-align:center; margin-bottom:var(--space-10)">
+        <span style="display:inline-block; padding:6px 14px; border-radius:var(--radius-full); background:rgba(42,172,176,0.14); border:1px solid rgba(42,172,176,0.4); color:var(--teal-200); font-size:var(--text-caption); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-label-caps); margin-bottom:var(--space-5); box-shadow:0 0 30px -12px rgba(42,172,176,0.8)">Certificação oficial</span>
+        <h2 style="font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-display-caps); line-height:var(--leading-heading); font-size:clamp(1.8rem,4vw,var(--text-display-md)); color:var(--text-inverse); margin:0 0 var(--space-4)">Saia com uma <span style="color:var(--teal-300); text-shadow:0 0 26px rgba(42,172,176,0.6)">carteirinha reconhecida</span></h2>
+        <p style="color:var(--text-inverse-muted); font-size:var(--text-body-lg); max-width:600px; margin:0 auto">Válida por 2 anos e aceita em processos de qualificação profissional nas principais entidades do país.</p>
+      </div>
+      <div style="background:linear-gradient(160deg, rgba(42,172,176,0.1), rgba(255,255,255,0.012)); border:1px solid rgba(42,172,176,0.32); border-radius:var(--radius-lg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 0 48px -24px rgba(42,172,176,0.6); padding:var(--space-8); margin-bottom:var(--space-6)">
+        <p style="color:var(--teal-300); font-size:var(--text-caption); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-label-caps); margin:0 0 var(--space-5)">O que você será capaz de fazer</p>
+        <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:var(--space-4)">
+          <sc-for list="{{ skills }}" as="skill" hint-placeholder-count="2">
+            <li style="display:flex; align-items:flex-start; gap:var(--space-3)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-300)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px; filter:drop-shadow(0 0 4px rgba(42,172,176,0.6))"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+              <span style="color:var(--text-inverse); line-height:var(--leading-body)">{{ skill }}</span>
+            </li>
+          </sc-for>
+        </ul>
+      </div>
+      <div style="background:linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); border:1px solid rgba(42,172,176,0.35); border-radius:var(--radius-lg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 0 48px -26px rgba(42,172,176,0.6); padding:var(--space-8); margin-bottom:var(--space-8)">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-6)">
+          <div style="background:#fff; border:1px solid rgba(255,255,255,0.5); border-radius:var(--radius-lg); padding:var(--space-4) var(--space-5); box-shadow:0 0 40px -10px rgba(255,255,255,0.4); flex-shrink:0">
+            <img src="assets/logo-sbc.png" alt="SBC" style="height:76px; width:auto; object-fit:contain; display:block" loading="lazy">
+          </div>
+          <div style="flex:1; min-width:220px">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:var(--space-2)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-300)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 4px rgba(42,172,176,0.6))"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg>
+              <span style="color:var(--teal-300); font-weight:700; font-size:var(--text-body-sm); text-transform:uppercase; letter-spacing:var(--tracking-label-caps)">Carteirinha com validade de 2 anos</span>
+            </div>
+            <p style="color:var(--text-inverse-muted); font-size:var(--text-body-sm); line-height:var(--leading-body); margin:0 0 var(--space-4)">Certificado emitido pela <strong style="color:var(--text-inverse)">Sociedade Brasileira de Cardiologia (SBC)</strong>, reconhecido por:</p>
+            <div style="display:flex; flex-wrap:wrap; gap:var(--space-3)">
+              <sc-for list="{{ recognitions }}" as="r" hint-placeholder-count="2">
+                <div style="display:flex; align-items:flex-start; gap:8px; background:rgba(42,172,176,0.14); border:1px solid rgba(42,172,176,0.35); border-radius:var(--radius-md); padding:var(--space-3) var(--space-4)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal-300)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg>
+                  <div>
+                    <span style="color:var(--teal-300); font-weight:700; font-size:var(--text-body-sm); display:block">{{ r.acronym }}</span>
+                    <span style="color:var(--text-inverse-muted); font-size:var(--text-caption)">{{ r.full }}</span>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:var(--space-3)">
+        <a href="#precos" style="display:inline-flex; align-items:center; gap:10px; height:56px; padding:0 var(--space-8); border-radius:var(--radius-md); background:var(--accent-primary); color:#fff; font-weight:700; font-size:var(--text-body-md); text-decoration:none; text-transform:uppercase; letter-spacing:0.03em; box-shadow:0 0 44px -8px rgba(250,46,56,0.75); transition:all var(--duration-fast) var(--ease-standard)" style-hover="background:#e01e28; box-shadow:0 0 60px -2px rgba(250,46,56,0.95)">
+          Inscreva-se aqui e atue com segurança
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p style="font-size:var(--text-caption); color:var(--text-inverse-muted); margin:0">Vagas limitadas • Garantia de 7 dias</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIALS ===================== -->
+  <section style="position:relative; overflow:hidden; padding:var(--space-20) var(--space-6)">
+    <div style="position:relative; z-index:2; max-width:1080px; margin:0 auto">
+      <div style="text-align:center; margin-bottom:var(--space-12)">
+        <h2 style="font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-display-caps); line-height:var(--leading-heading); font-size:clamp(1.8rem,4vw,var(--text-display-md)); color:var(--text-inverse); margin:0 0 var(--space-4)">Quem treinou, <span style="color:var(--teal-300); text-shadow:0 0 26px rgba(42,172,176,0.6)">recomenda</span></h2>
+        <p style="color:var(--text-inverse-muted); font-size:var(--text-body-lg); max-width:600px; margin:0 auto">Profissionais de saúde que já passaram pelo TECA MedSafe Brasil.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:var(--space-6)">
+        <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+          <div style="background:linear-gradient(160deg, rgba(255,255,255,0.055), rgba(255,255,255,0.012)); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius-lg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 22px 56px -32px rgba(0,0,0,0.9), 0 0 44px -28px rgba(42,172,176,0.5); padding:var(--space-8); position:relative">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="rgba(42,172,176,0.28)" style="position:absolute; top:var(--space-6); right:var(--space-6)"><path d="M9.9 4.6A6 6 0 0 0 4 10.5V19h7v-8H7.5a3 3 0 0 1 2.9-3.6zm9 0A6 6 0 0 0 13 10.5V19h7v-8h-3.5a3 3 0 0 1 2.9-3.6z"/></svg>
+            <div style="display:flex; gap:2px; margin-bottom:var(--space-4)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--teal-400)" style="filter:drop-shadow(0 0 4px rgba(42,172,176,0.6))"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--teal-400)" style="filter:drop-shadow(0 0 4px rgba(42,172,176,0.6))"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--teal-400)" style="filter:drop-shadow(0 0 4px rgba(42,172,176,0.6))"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--teal-400)" style="filter:drop-shadow(0 0 4px rgba(42,172,176,0.6))"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--teal-400)" style="filter:drop-shadow(0 0 4px rgba(42,172,176,0.6))"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p style="color:var(--text-inverse-muted); line-height:var(--leading-body); margin:0 0 var(--space-6); font-style:italic">"{{ t.text }}"</p>
+            <div>
+              <p style="font-family:var(--font-display); font-weight:600; margin:0; color:var(--text-inverse)">{{ t.name }}</p>
+              <p style="font-size:var(--text-body-sm); color:var(--text-inverse-muted); margin:0">{{ t.role }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex; justify-content:center; margin-top:var(--space-10)">
+        <a href="#precos" style="display:inline-flex; align-items:center; gap:10px; height:52px; padding:0 var(--space-6); border-radius:var(--radius-md); background:var(--accent-primary); color:#fff; font-weight:700; font-size:var(--text-body-md); text-decoration:none; text-transform:uppercase; letter-spacing:0.03em; box-shadow:0 0 40px -10px rgba(250,46,56,0.7); transition:all var(--duration-fast) var(--ease-standard)" style-hover="background:#e01e28; box-shadow:0 0 56px -4px rgba(250,46,56,0.9)">
+          Inscreva-se aqui e atue com segurança
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRICING ===================== -->
+  <section id="precos" class="teca-bg" style="padding:var(--space-20) var(--space-6); position:relative; overflow:hidden">
+    <div style="max-width:1080px; margin:0 auto; position:relative; z-index:2">
+      <div style="text-align:center; margin-bottom:var(--space-6)">
+        <span style="display:inline-block; padding:6px 14px; border-radius:var(--radius-full); background:rgba(42,172,176,0.12); border:1px solid rgba(42,172,176,0.35); color:var(--teal-200); font-size:var(--text-caption); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-label-caps); margin-bottom:var(--space-6); box-shadow:0 0 30px -12px rgba(42,172,176,0.8)">Investimento que se paga no primeiro plantão</span>
+        <h2 style="font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-display-caps); line-height:var(--leading-heading); font-size:clamp(1.9rem,4vw,var(--text-display-lg)); color:var(--text-inverse); margin:0 0 var(--space-4)">Garanta sua <span style="color:var(--teal-300); text-shadow:0 0 28px rgba(42,172,176,0.7)">vaga_</span></h2>
+        <p style="color:var(--text-inverse-muted); font-size:var(--text-body-lg); max-width:640px; margin:0 auto">No seu primeiro plantão após o TECA, você age com a segurança de quem treinou para isso. Vagas limitadas por turma.</p>
+      </div>
+
+      <!-- ===== Oferta única: TECA A ===== -->
+      <div style="max-width:940px; margin:var(--space-12) auto 0; position:relative; background:linear-gradient(160deg, rgba(42,172,176,0.15), rgba(255,255,255,0.018)); border:1.5px solid rgba(42,172,176,0.55); border-radius:var(--radius-xl); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); box-shadow:0 0 100px -34px rgba(42,172,176,0.9), 0 30px 70px -40px rgba(0,0,0,0.92); overflow:hidden">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr))">
+          <!-- Coluna: o que está incluído -->
+          <div style="padding:var(--space-10)">
+            <span style="display:inline-block; padding:5px 12px; border-radius:var(--radius-full); background:var(--teal-500); color:var(--navy-900); font-size:var(--text-caption); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-label-caps); box-shadow:0 0 28px -6px rgba(42,172,176,0.9)">TECA A — Presencial</span>
+            <h3 style="font-family:var(--font-display); font-weight:700; font-size:var(--text-heading-md); color:var(--text-inverse); margin:var(--space-5) 0 var(--space-6); line-height:var(--leading-heading)">O que está incluído</h3>
+            <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:var(--space-3)">
+              <sc-for list="{{ includedA }}" as="item" hint-placeholder-count="9">
+                <li style="display:flex; align-items:flex-start; gap:var(--space-3); font-size:var(--text-body-sm); color:var(--text-inverse-muted)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal-300)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px; filter:drop-shadow(0 0 4px rgba(42,172,176,0.6))"><path d="M20 6 9 17l-5-5"/></svg>
+                  {{ item }}
+                </li>
+              </sc-for>
+            </ul>
+          </div>
+          <!-- Coluna: preço + CTA -->
+          <div style="padding:var(--space-10); background:linear-gradient(180deg, rgba(42,172,176,0.12), rgba(42,172,176,0.02)); border-left:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; justify-content:center; text-align:center">
+            <p style="color:var(--text-inverse-muted); font-size:var(--text-body-sm); margin:0 0 4px">apenas</p>
+            <div style="display:flex; align-items:baseline; justify-content:center; gap:8px; margin-bottom:6px">
+              <span style="font-family:var(--font-display); font-weight:700; font-size:var(--text-heading-md); color:var(--teal-300); font-variant-numeric:tabular-nums">12x</span>
+              <span style="font-family:var(--font-display); font-weight:700; font-size:clamp(2.6rem,6vw,3.6rem); color:var(--text-inverse); line-height:1; font-variant-numeric:tabular-nums; text-shadow:0 0 30px rgba(42,172,176,0.45)">R$ 133,08</span>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:center; gap:6px; color:var(--text-inverse-muted); font-size:var(--text-body-sm); margin-bottom:var(--space-8)">
+              <span>ou</span><span style="font-weight:700; color:var(--text-inverse)">R$ 1.597</span><span>à vista</span>
+            </div>
+            <a href="https://ensino.medsafebrasil.com.br/matricula/matricula-hibrida/4AJ2FPZ" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:8px; width:100%; height:56px; border-radius:var(--radius-md); background:var(--accent-primary); color:#fff; font-weight:700; font-size:var(--text-body-md); text-decoration:none; text-transform:uppercase; letter-spacing:0.03em; box-sizing:border-box; box-shadow:0 0 44px -8px rgba(250,46,56,0.85); transition:all var(--duration-fast) var(--ease-standard)" style-hover="background:#e01e28; box-shadow:0 0 60px -2px rgba(250,46,56,1)">
+              Garantir minha vaga
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <div style="display:flex; align-items:center; justify-content:center; gap:6px; margin-top:var(--space-4); color:var(--text-inverse-muted); font-size:var(--text-caption)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Pagamento 100% seguro · Garantia de 7 dias
+            </div>
+          </div>
+        </div>
+        <!-- Rodapé do card: bônus ebook -->
+        <div style="display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-5); padding:var(--space-6) var(--space-10); border-top:1px solid rgba(42,172,176,0.35); background:linear-gradient(90deg, rgba(42,172,176,0.12), rgba(255,255,255,0.01))">
+          <img src="assets/ebook-teca.jpeg" alt="Ebook TECA SBC" style="height:120px; width:auto; object-fit:contain; border-radius:var(--radius-md); box-shadow:0 0 36px -12px rgba(42,172,176,0.7), var(--shadow-lg); flex-shrink:0" loading="lazy">
+          <div style="flex:1; min-width:200px">
+            <span style="display:inline-flex; align-items:center; gap:6px; color:var(--teal-300); font-size:var(--text-caption); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-label-caps)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>
+              Bônus incluído
+            </span>
+            <p style="font-family:var(--font-display); font-weight:700; font-size:var(--text-body-lg); color:var(--text-inverse); margin:4px 0 0">Ebook Digital TECA — pelo site SBC</p>
+            <p style="font-size:var(--text-body-sm); color:var(--text-inverse-muted); margin:2px 0 0; line-height:var(--leading-body)">Material de estudo digital exclusivo, no portal oficial da Sociedade Brasileira de Cardiologia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section id="faq" style="position:relative; overflow:hidden; padding:var(--space-24) var(--space-6)">
+    <div style="position:relative; z-index:2; max-width:760px; margin:0 auto">
+      <div style="text-align:center; margin-bottom:var(--space-12)">
+        <h2 style="font-family:var(--font-display); font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-display-caps); line-height:var(--leading-heading); font-size:clamp(1.8rem,4vw,var(--text-display-md)); color:var(--text-inverse); margin:0">Perguntas <span style="color:var(--teal-300); text-shadow:0 0 26px rgba(42,172,176,0.6)">frequentes</span></h2>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:var(--space-3)">
+        <sc-for list="{{ faqItems }}" as="f" hint-placeholder-count="6">
+          <div style="background:linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.012)); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius-lg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); overflow:hidden">
+            <button onClick="{{ f.onClick }}" style="width:100%; display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); padding:var(--space-5) var(--space-6); background:transparent; border:none; text-align:left; cursor:pointer">
+              <span style="font-family:var(--font-display); font-weight:600; font-size:var(--text-body-md); color:var(--text-inverse)">{{ f.q }}</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="{{ f.iconStyle }}"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div style="{{ f.answerStyle }}">
+              <p style="padding:0 var(--space-6) var(--space-5); margin:0; color:var(--text-inverse-muted); line-height:var(--leading-body)">{{ f.a }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer id="sitefooter" style="position:relative; padding:var(--space-16) var(--space-6) var(--space-8); border-top:1px solid rgba(255,255,255,0.08)">
+    <div style="max-width:1160px; margin:0 auto">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:var(--space-10); margin-bottom:var(--space-12)">
+        <div style="max-width:340px">
+          <img src="assets/teca-logo-branca.png" alt="TECA SBC" style="height:42px; width:auto; margin-bottom:var(--space-4)">
+          <p style="color:var(--text-inverse-muted); font-size:var(--text-body-sm); line-height:var(--leading-body); margin:0 0 var(--space-5)">Treinamento em Emergências Cardiovasculares — capacitação prática para reconhecer, decidir e agir nos primeiros minutos que salvam vidas.</p>
+          <div style="display:flex; gap:var(--space-3)">
+            <a href="https://www.instagram.com/medsafebrasil?igsh=cW9rYm9xMzF5bDZx" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:999px; border:1px solid rgba(42,172,176,0.4); color:var(--teal-300); box-shadow:0 0 20px -8px rgba(42,172,176,0.7); transition:all .2s var(--ease-standard)" style-hover="box-shadow:0 0 26px -4px rgba(42,172,176,0.95)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+            </a>
+            <a href="https://wa.me/558698079236" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style="display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:999px; border:1px solid rgba(37,211,102,0.45); color:#25D366; box-shadow:0 0 20px -8px rgba(37,211,102,0.7); transition:all .2s var(--ease-standard)" style-hover="box-shadow:0 0 26px -4px rgba(37,211,102,0.95)">
+              <svg viewBox="0 0 32 32" fill="currentColor" width="18" height="18"><path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.68 4.61 1.86 6.5L4 29l7.74-1.84A11.94 11.94 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm5.2 12.4c-.28-.14-1.67-.82-1.93-.91-.26-.1-.44-.14-.63.14-.19.28-.72.91-.88 1.1-.16.19-.33.21-.61.07-.28-.14-1.18-.43-2.25-1.38-.83-.74-1.39-1.65-1.56-1.93-.16-.28-.02-.43.12-.57.13-.12.28-.33.42-.49.14-.16.19-.28.28-.47.1-.19.05-.35-.02-.49-.07-.14-.63-1.52-.86-2.08-.23-.55-.46-.47-.63-.48l-.54-.01c-.19 0-.49.07-.75.35-.26.28-1 1-.97 2.43.03 1.43 1.03 2.81 1.17 3 .14.19 2.02 3.09 4.9 4.33.69.3 1.22.47 1.64.6.69.22 1.32.19 1.81.12.55-.08 1.67-.68 1.91-1.34.23-.65.23-1.21.16-1.33-.07-.12-.26-.19-.54-.33z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <p style="color:var(--text-inverse); font-family:var(--font-display); font-weight:700; font-size:var(--text-body-sm); text-transform:uppercase; letter-spacing:var(--tracking-label-caps); margin:0 0 var(--space-4)">Navegação</p>
+          <nav style="display:flex; flex-direction:column; gap:var(--space-3)">
+            <a class="fnav" href="#sobre" style="font-size:var(--text-body-sm)">O Curso</a>
+            <a class="fnav" href="#metodologia" style="font-size:var(--text-body-sm)">Metodologia</a>
+            <a class="fnav" href="#professores" style="font-size:var(--text-body-sm)">Professores</a>
+            <a class="fnav" href="#faq" style="font-size:var(--text-body-sm)">Perguntas frequentes</a>
+          </nav>
+        </div>
+        <div>
+          <p style="color:var(--text-inverse); font-family:var(--font-display); font-weight:700; font-size:var(--text-body-sm); text-transform:uppercase; letter-spacing:var(--tracking-label-caps); margin:0 0 var(--space-4)">Formato</p>
+          <nav style="display:flex; flex-direction:column; gap:var(--space-3)">
+            <a class="fnav" href="#precos" style="font-size:var(--text-body-sm)">TECA A — Presencial</a>
+            <a class="fnav" href="#precos" style="font-size:var(--text-body-sm)">Investimento e bônus</a>
+          </nav>
+        </div>
+        <div>
+          <p style="color:var(--text-inverse); font-family:var(--font-display); font-weight:700; font-size:var(--text-body-sm); text-transform:uppercase; letter-spacing:var(--tracking-label-caps); margin:0 0 var(--space-4)">Certificação</p>
+          <p style="color:var(--text-inverse-muted); font-size:var(--text-body-sm); line-height:var(--leading-body); margin:0 0 var(--space-4)">Curso oficial da Sociedade Brasileira de Cardiologia (SBC), reconhecido por ONA e CNRM.</p>
+          <a href="https://wa.me/558698079236" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; font-size:var(--text-body-sm); color:var(--teal-300); text-decoration:none; font-weight:600">Fale com a equipe
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div style="height:1px; background:linear-gradient(90deg, transparent, rgba(250,46,56,0.4), transparent); margin-bottom:var(--space-6)"></div>
+      <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--space-4)">
+        <p style="font-size:var(--text-caption); color:var(--text-inverse-muted); margin:0">© 2026 MedSafe Brasil — Treinamento TECA. Todos os direitos reservados.</p>
+        <p style="font-size:var(--text-caption); color:var(--text-inverse-muted); margin:0">MedSafe Brasil × SBC · @medsafebrasil</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== FLOATING WHATSAPP ===================== -->
+  <a href="https://wa.me/558698079236" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp" style="position:fixed; bottom:24px; right:24px; z-index:60; display:flex; align-items:center; justify-content:center; width:56px; height:56px; border-radius:999px; background:#25D366; box-shadow:0 0 32px -4px rgba(37,211,102,0.8), var(--shadow-lg); transition:transform var(--duration-fast) var(--ease-standard)" style-hover="transform:scale(1.08)">
+    <svg viewBox="0 0 32 32" fill="white" width="30" height="30"><path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.68 4.61 1.86 6.5L4 29l7.74-1.84A11.94 11.94 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 21.5c-1.98 0-3.84-.54-5.44-1.47l-.39-.23-4.01.95.99-3.85-.26-.4A9.44 9.44 0 0 1 6.5 15c0-5.238 4.262-9.5 9.5-9.5S25.5 9.762 25.5 15 21.238 24.5 16 24.5zm5.2-7.1c-.28-.14-1.67-.82-1.93-.91-.26-.1-.44-.14-.63.14-.19.28-.72.91-.88 1.1-.16.19-.33.21-.61.07-.28-.14-1.18-.43-2.25-1.38-.83-.74-1.39-1.65-1.56-1.93-.16-.28-.02-.43.12-.57.13-.12.28-.33.42-.49.14-.16.19-.28.28-.47.1-.19.05-.35-.02-.49-.07-.14-.63-1.52-.86-2.08-.23-.55-.46-.47-.63-.48l-.54-.01c-.19 0-.49.07-.75.35-.26.28-1 1-.97 2.43.03 1.43 1.03 2.81 1.17 3 .14.19 2.02 3.09 4.9 4.33.69.3 1.22.47 1.64.6.69.22 1.32.19 1.81.12.55-.08 1.67-.68 1.91-1.34.23-.65.23-1.21.16-1.33-.07-.12-.26-.19-.54-.33z"/></svg>
+  </a>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const PROFESSORS = [
+  { name: "Adélia Dalva da Silva Oliveira", role: "Enfermagem em Urgência e Emergência", cred: "Pós-Doutora em Enfermagem Fundamental pela USP. Doutora em Políticas Públicas pela UFPI. Especialista em nefrologia, transplante e urgência/emergência. Docente do curso de Medicina do Centro Universitário CET.", img: "assets/prof-adelia.jpg", pos: "top" },
+  { name: "Jadilson Rodrigues Mendes", role: "Enfermagem em Cardiologia e Terapia Intensiva", cred: "Mestre em Saúde da Família. Especialista em Cardiologia pelo InCor-USP. 14 anos de UTI no Hospital São Marcos. Enfermeiro Intensivista no HU-PI. Professor de Fisiologia pela UNIFACID. Professor MedSafe.", img: "assets/prof-jadilson.jpg", pos: "top" },
+  { name: "Francisco César de Oliveira Gonçalves", role: "Cardiologia e Terapia Intensiva", cred: "Título de Especialista em Terapia Intensiva pela AMIB/AMB. Residências em Cardiologia (HUUFPI) e Ecocardiografia (HUWC/UFC). Coordenador das UTIs 1 e 2 do Hospital Getúlio Vargas-PI. Cardiologista da linha de cuidados do IAM do Estado.", img: "assets/prof-cesar.jpg", pos: "top" },
+  { name: "Thiago Nunes Pereira Leite", role: "Cardiologia e Ecocardiografia", cred: "Doutorado em Cardiologia pela USP. Residência no InCor-HCFMUSP. Título de Especialista em Cardiologia e Ecocardiografia pela SBC. Coordenador médico da MedSafe Brasil. Coordenador da linha de tratamento do IAM do Estado do Piauí.", img: "assets/prof-thiago.jpeg", pos: "top" },
+  { name: "Antonio Luiz do Nascimento", role: "Cardiologia e Clínica Médica", cred: "Graduação em Medicina pela UFRN (2012). Residências em Clínica Médica e Cardiologia pelo HUOL/UFRN. MBA em Gestão, Inovação e Serviços em Saúde (PUC-RS). Plantonista MedSafe na Linha de Cuidados do IAM-PI. Coordenador de Cardiologia e Gerente Médico do Grupo Medimagem (Athena Saúde). Diretoria Clínica do Hospital Prontomed Adulto.", img: "assets/prof-antonio.jpg", pos: "top" },
+  { name: "Vitória Régia Beserra Barbosa Ximenes", role: "Cardiologia", cred: "Possui graduação em Medicina pela Faculdade de Saúde, Ciências Humanas e Tecnológicas do Piauí (2011). Tem experiência na área de Medicina, com ênfase em Medicina. Médica Cardiologista.", img: "assets/prof-vitoria.jpg", pos: "top" },
+  { name: "Bruna Gomes de Medeiros", role: "Cardiologia e Ecocardiografia", cred: "Mestre em Medicina Cardiovascular pela USP e Instituto Dante Pazzanese de Cardiologia (2021). Título de Especialista em Cardiologia pela SBC (2020) com Certificado em Ecocardiografia (2022). Residências em Clínica Médica (Hospital Municipal Carmino Caricchio-SP) e Cardiologia (Instituto Dante Pazzanese). Graduação em Medicina pela UNINOVAFAPI (2014).", img: "assets/prof-bruna.jpeg", pos: "center 10%" },
+  { name: "Wilder Dias Pacheco", role: "Cardiologia e Arritmologia", cred: "Graduação em Medicina pela UFPI. Residências em Clínica Médica (Hospital Santa Marcelina-SP) e Cardiologia (Hospital Israelita Albert Einstein-SP). Título de Especialista em Cardiologia pela SBC-AMB. Especialização em Arritmia Clínica pelo InCor-USP. Cardiologista e Arritmologista no Hospital São Marcos, Prontocapi e Korper Cardio. Coordenador da Enfermaria de Cardiologia do Hospital São Marcos. Professor da UNINOVAFAPI.", img: "assets/prof-wilder.jpeg", pos: "top" },
+];
+
+const FAQS = [
+  { q: "Para quem é o TECA?", a: "Para médicos, enfermeiros e estudantes de medicina do último ano que atuam ou pretendem atuar em situações de emergência — pronto-socorro, UTI, UPA, SAMU, emergência hospitalar ou ambulatorial." },
+  { q: "O certificado tem reconhecimento oficial?", a: "Sim. O TECA é um curso oficial da Sociedade Brasileira de Cardiologia (SBC) e é reconhecido por entidades como: ONA (Organização Nacional de Acreditação) e CNRM (Comissão Nacional de Residência Médica). O certificado emitido comprova capacitação em emergências cardiovasculares e é reconhecido em processos de qualificação profissional." },
+  { q: "Preciso ter experiência prévia em cardiologia?", a: "Não. O curso parte do suporte básico de vida e avança progressivamente até protocolos avançados. Qualquer profissional de saúde com formação completa pode participar." },
+  { q: "Posso cancelar e receber meu dinheiro de volta?", a: "Sim. Oferecemos garantia incondicional de 7 dias. Se não gostar por qualquer motivo, devolvemos 100% do valor investido, sem burocracia." },
+];
+
+const PAIN_POINTS = [
+  "Travou na beira do leito sem saber a sequência correta de RCP?",
+  "Passou segundos decisivos perdido(a), sem saber por onde começar?",
+  "Se perdeu nas diretrizes de PCR quando mais precisava?",
+  "Ficou em dúvida se deveria chocar ou não o paciente?",
+  "Reviu o protocolo várias vezes e ainda sente insegurança?",
+  "Agiu no improviso enquanto o paciente não tinha pulso?",
+];
+
+const CONSEQUENCES = [
+  { label: "Você perde tempo", sub: "porque age no improviso" },
+  { label: "Você limita sua confiança", sub: "porque não tem protocolo definido" },
+  { label: "Você perde pacientes", sub: "porque falta processo e segurança" },
+];
+
+const BEFORE = [
+  "Não sabe a sequência correta de PCR",
+  "Age no improviso nos momentos críticos",
+  "Depende de outros profissionais para liderar",
+  "Sente insegurança nos plantões de emergência",
+  "Trava ao identificar ritmos chocáveis",
+  "Não consegue reconhecer e conduzir uma insuficiência aguda descompensada",
+];
+
+const AFTER = [
+  "Protocolo claro para cada emergência cardiovascular",
+  "RCP de alta qualidade desde o primeiro ciclo",
+  "Liderança confiante na parada cardiorrespiratória",
+  "Segurança para atuar em PS, UTI e emergência",
+  "Identificação imediata de FV, TVSP, AESP e Assistolia",
+  "Identificação e correta condução de bradiarritmias, taquiarritmias e insuficiência cardíaca aguda descompensada",
+];
+
+const MODULES = [
+  { num: "01", title: "Suporte Básico de Vida", desc: "Qualidade de RCP, compressões e ventilação" },
+  { num: "02", title: "Via Aérea e Dispositivos", desc: "Técnicas de manejo avançado de via aérea" },
+  { num: "03", title: "PCR Chocável (FV/TVSP)", desc: "Protocolo completo para ritmos chocáveis" },
+  { num: "04", title: "PCR Não Chocável", desc: "AESP e Assistolia — causas reversíveis (5H/5T)" },
+  { num: "05", title: "Síndrome Coronariana Aguda", desc: "IAM, angina instável e conduta inicial" },
+  { num: "06", title: "AVC na Emergência", desc: "Reconhecimento rápido e janela terapêutica" },
+  { num: "07", title: "Arritmias em Emergências", desc: "Bradiarritmias, taquiarritmias e cardioversão" },
+  { num: "08", title: "IC Descompensada e Pós-PCR", desc: "Cuidados pós-ressuscitação e casos integrados" },
+];
+
+const STATS = [
+  { value: "+1.500", label: "Profissionais treinados" },
+  { value: "98%", label: "Taxa de satisfação" },
+  { value: "9", label: "Instrutores especializados" },
+  { value: "SBC", label: "Certificação oficial" },
+];
+
+const SKILLS = [
+  "Identificação imediata de FV, TVSP, AESP e Assistolia",
+  "Identificação e correta condução de bradiarritmias, taquiarritmias e insuficiência cardíaca aguda descompensada",
+];
+
+const RECOGNITIONS = [
+  { acronym: "ONA", full: "Organização Nacional de Acreditação" },
+  { acronym: "CNRM", full: "Comissão Nacional de Residência Médica" },
+];
+
+const INCLUDED_A = [
+  "2 dias presenciais de treinamento intensivo",
+  "Todos os 8 módulos do currículo TECA SBC",
+  "Estações práticas de simulação em cenários reais",
+  "Material de apoio digital",
+  "Ebook digital pelo site SBC",
+  "Certificado de 16 horas",
+  "Carteirinha com validade de 2 anos",
+  "Certificação oficial reconhecida pela SBC",
+  "Garantia incondicional de 7 dias",
+];
+
+const TESTIMONIALS = [
+  { name: "Dr. Rafael Mendes", role: "Médico Emergencista — SP", text: "Antes do TECA eu travava em PCR. Depois do treinamento, liderei minha primeira ressuscitação com protocolo claro e segurança. Não tem preço." },
+  { name: "Enf. Camila Rocha", role: "Enfermeira de UTI — RJ", text: "Fiz o TECA e a diferença foi imediata. O treinamento presencial foi intenso do jeito certo e me preparou de verdade. Cheguei no plantão seguinte outra profissional." },
+  { name: "Dr. Lucas Almeida", role: "Clínico Geral em PS — MG", text: "Trabalho em pronto-socorro e nunca tinha tido treinamento estruturado em PCR. O TECA mudou completamente minha atuação nos momentos críticos." },
+];
+
+class Component extends DCLogic {
+  state = { faqOpen: 0, current: 0, visible: 3, isMobile: false };
+
+  componentDidMount() {
+    this._onResize = () => {
+      const w = window.innerWidth;
+      const visible = w < 640 ? 1 : (w < 1024 ? 2 : 3);
+      const isMobile = w < 768;
+      if (visible !== this.state.visible || isMobile !== this.state.isMobile) {
+        this.setState({ visible, isMobile, current: 0 });
+      }
+    };
+    this._onResize();
+    window.addEventListener("resize", this._onResize);
+    this._timer = setInterval(() => this.next(), 4500);
+
+    // Header follows scroll: compact + red glow after scrolling
+    this._scroll = () => {
+      const hdr = document.getElementById("sitehdr");
+      const bar = document.getElementById("hdrbar");
+      if (!hdr) return;
+      if (window.scrollY > 24) {
+        hdr.style.background = "rgba(10,5,6,0.92)";
+        hdr.style.boxShadow = "0 10px 34px -14px rgba(250,46,56,0.5)";
+        if (bar) bar.style.height = "60px";
+      } else {
+        hdr.style.background = "rgba(22,11,12,0.78)";
+        hdr.style.boxShadow = "none";
+        if (bar) bar.style.height = "74px";
+      }
+    };
+    window.addEventListener("scroll", this._scroll, { passive: true });
+    this._scroll();
+
+    // Scroll-reveal animations on all page elements (staggered).
+    // Uses manual viewport checks (NOT IntersectionObserver) so content
+    // above the fold is always revealed on load, with no way to get stuck hidden.
+    this._targets = [];
+    this._revealCheck = () => {
+      if (!this._targets || !this._targets.length) return;
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const rest = [];
+      this._targets.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < vh * 0.92 && r.bottom > 0) {
+          el.style.animationDelay = ((el.__d || 0) * 70) + "ms";
+          el.classList.remove("rv-init");
+          el.classList.add("rv-go");
+        } else {
+          rest.push(el);
+        }
+      });
+      this._targets = rest;
+      if (!rest.length) {
+        window.removeEventListener("scroll", this._revealCheck);
+        document.removeEventListener("scroll", this._revealCheck, true);
+        window.removeEventListener("resize", this._revealCheck);
+        if (this._revealPoll) { clearInterval(this._revealPoll); this._revealPoll = null; }
+      }
+    };
+    this._setupReveal = () => {
+      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) return; // leave everything visible
+      const seen = new Set();
+      const list = [];
+      const add = (el, i) => {
+        if (!el || seen.has(el)) return;
+        const cs = getComputedStyle(el);
+        if (cs.position === "absolute" || cs.position === "fixed") return;
+        seen.add(el);
+        el.__d = i;
+        list.push(el);
+      };
+      document.querySelectorAll("#top > section, #top > footer").forEach((sec) => {
+        const w = sec.querySelector(":scope > div");
+        if (w) Array.prototype.forEach.call(w.children, (c, i) => add(c, i));
+      });
+      document.querySelectorAll('#top section div[style*="display:grid"], #top section div[style*="flex-direction:column"], #top section ul, #top footer div[style*="display:grid"]').forEach((g) => {
+        Array.prototype.forEach.call(g.children, (c, i) => add(c, i));
+      });
+      list.forEach((el) => el.classList.add("rv-init"));
+      this._targets = list;
+      this._revealCheck();
+      window.addEventListener("scroll", this._revealCheck, { passive: true });
+      document.addEventListener("scroll", this._revealCheck, { passive: true, capture: true });
+      window.addEventListener("resize", this._revealCheck, { passive: true });
+      // polling safety: re-checks the current viewport so below-fold items
+      // reveal even if scroll events originate from a non-window scroller.
+      // Only reveals what is actually in view, so far-below items still wait.
+      var passes = 0;
+      this._revealPoll = setInterval(() => {
+        this._revealCheck();
+        if (++passes > 40 || !this._targets.length) { clearInterval(this._revealPoll); this._revealPoll = null; }
+      }, 350);
+    };
+    setTimeout(this._setupReveal, 60);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._onResize);
+    window.removeEventListener("scroll", this._scroll);
+    window.removeEventListener("scroll", this._revealCheck);
+    document.removeEventListener("scroll", this._revealCheck, true);
+    window.removeEventListener("resize", this._revealCheck);
+    if (this._timer) clearInterval(this._timer);
+    if (this._revealPoll) clearInterval(this._revealPoll);
+  }
+
+  maxIndex() { return Math.max(0, PROFESSORS.length - this.state.visible); }
+  next() { this.setState((s) => ({ current: s.current >= this.maxIndex() ? 0 : s.current + 1 })); }
+  prev() { this.setState((s) => ({ current: s.current <= 0 ? this.maxIndex() : s.current - 1 })); }
+  goDot(i) { this.setState({ current: i }); }
+  toggleFaq(i) { this.setState((s) => ({ faqOpen: s.faqOpen === i ? null : i })); }
+  toggleMobile() { this.setState((s) => ({ mobileOpen: !s.mobileOpen })); }
+  closeMobile() { this.setState({ mobileOpen: false }); }
+
+  renderVals() {
+    const gap = 24;
+    const v = this.state.visible;
+    const cur = this.state.current;
+    const basis = `calc(${(100 / v).toFixed(4)}% - ${(gap * (v - 1) / v).toFixed(2)}px)`;
+    const trackTransform = `translateX(calc(-${(cur * 100 / v).toFixed(4)}% - ${(cur * gap / v).toFixed(2)}px))`;
+
+    const professors = PROFESSORS.map((p) => ({
+      name: p.name, role: p.role, cred: p.cred, img: p.img, pos: p.pos,
+      style: { flex: `0 0 ${basis}`, maxWidth: basis },
+    }));
+
+    const maxI = this.maxIndex();
+    const dots = [];
+    for (let i = 0; i <= maxI; i++) {
+      const active = i === cur;
+      dots.push({
+        onClick: () => this.goDot(i),
+        style: { width: active ? 24 : 8, height: 8, borderRadius: 999, border: "none", padding: 0, cursor: "pointer", background: active ? "var(--teal-400)" : "rgba(255,255,255,0.28)", boxShadow: active ? "0 0 14px 0 rgba(42,172,176,0.9)" : "none", transition: "all var(--duration-base) var(--ease-standard)" },
+      });
+    }
+
+    const faqItems = FAQS.map((f, i) => {
+      const open = this.state.faqOpen === i;
+      return {
+        q: f.q, a: f.a, onClick: () => this.toggleFaq(i),
+        iconStyle: { flexShrink: 0, color: open ? "var(--teal-300)" : "var(--text-inverse-muted)", transition: "transform var(--duration-base) var(--ease-standard)", transform: open ? "rotate(180deg)" : "rotate(0deg)" },
+        answerStyle: { maxHeight: open ? 480 : 0, overflow: "hidden", transition: "max-height var(--duration-slow) var(--ease-standard)" },
+      };
+    });
+
+    return {
+      desktop: !this.state.isMobile,
+      mobile: this.state.isMobile,
+      mobileOpen: !!this.state.mobileOpen,
+      toggleMobile: () => this.toggleMobile(),
+      closeMobile: () => this.closeMobile(),
+      professors, trackTransform,
+      prev: () => this.prev(), next: () => this.next(),
+      dots,
+      stats: STATS,
+      painPoints: PAIN_POINTS,
+      consequences: CONSEQUENCES,
+      before: BEFORE, after: AFTER,
+      modules: MODULES,
+      skills: SKILLS,
+      recognitions: RECOGNITIONS,
+      testimonials: TESTIMONIALS,
+      includedA: INCLUDED_A,
+      faqItems,
+    };
+  }
+}
+</script>
+</body>
+</html>

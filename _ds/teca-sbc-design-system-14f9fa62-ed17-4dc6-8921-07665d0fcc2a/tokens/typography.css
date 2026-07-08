@@ -1,0 +1,48 @@
+/* ==========================================================================
+   TECA SBC — Typography tokens
+   Single family (Space Grotesk, variable) doing both display and body duty —
+   matching the guide's "Tipografia: Space Grotesk" spec. Display sizes lean
+   heavy-weight uppercase (as in the "TECA SBC_" wordmark); body sizes stay
+   regular/medium for long-form clinical reading.
+   ========================================================================== */
+
+:root {
+  --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body:    "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    "Space Grotesk", ui-monospace, monospace; /* tabular figures for stats/timers */
+
+  /* Weights (variable font: 300–700) */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Display scale — heavy, tight, often uppercase */
+  --text-display-xl: 4.5rem;   /* 72px */
+  --text-display-lg: 3.5rem;   /* 56px */
+  --text-display-md: 2.75rem;  /* 44px */
+  --text-display-sm: 2.125rem; /* 34px */
+
+  /* Heading scale */
+  --text-heading-lg: 1.75rem;  /* 28px */
+  --text-heading-md: 1.375rem; /* 22px */
+  --text-heading-sm: 1.125rem; /* 18px */
+
+  /* Body scale */
+  --text-body-lg: 1.125rem; /* 18px */
+  --text-body-md: 1rem;     /* 16px */
+  --text-body-sm: 0.875rem; /* 14px */
+  --text-caption: 0.75rem;  /* 12px */
+
+  /* Line heights */
+  --leading-display: 1.02;
+  --leading-heading: 1.15;
+  --leading-body: 1.55;
+  --leading-tight: 1.0;
+
+  /* Letter spacing */
+  --tracking-display-caps: 0.01em;
+  --tracking-label-caps:   0.08em;
+  --tracking-normal:       0;
+}

@@ -1,0 +1,8 @@
+/* TECA SBC Design System — global stylesheet entry point.
+   Consumers link only this file; everything else is pulled in via @import. */
+
+@import "tokens/fonts.css";
+@import "tokens/colors.css";
+@import "tokens/typography.css";
+@import "tokens/spacing.css";
+@import "tokens/base.css";

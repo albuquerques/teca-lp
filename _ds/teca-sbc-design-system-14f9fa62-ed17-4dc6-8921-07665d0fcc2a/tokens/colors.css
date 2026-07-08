@@ -1,0 +1,110 @@
+/* ==========================================================================
+   TECA SBC — Color tokens
+   Base ramps first (numbered, raw), semantic aliases second (named by use).
+   Palette derived from the TECA SBC brand mark + course notebook mockup:
+   teal (clinical/tech safety), deep wine (premium, high-stakes gravity),
+   crimson (cardiac urgency, used sparingly), navy (authoritative ink), and
+   warm paper neutrals.
+   ========================================================================== */
+
+:root {
+  /* ---- Teal — primary brand accent (mark color, links, primary actions) ---- */
+  --teal-50:  #eaf7f7;
+  --teal-100: #cfeeef;
+  --teal-200: #9edde0;
+  --teal-300: #6cc8cc;
+  --teal-400: #42b7bb;
+  --teal-500: #2aacb0; /* brand mark teal */
+  --teal-600: #1f8f93;
+  --teal-700: #1a7276;
+  --teal-800: #17595c;
+  --teal-900: #123f41;
+
+  /* ---- Wine — dark premium surface (hero sections, covers, dark UI) ---- */
+  --wine-950: #170a0c;
+  --wine-900: #2b0f12;
+  --wine-800: #3a1418; /* primary dark surface */
+  --wine-700: #4b1b20;
+  --wine-600: #5e252b;
+  --wine-500: #733038;
+  --wine-400: #8f4650;
+  --wine-300: #b06a73;
+
+  /* ---- Crimson — cardiac / emergency accent, used sparingly for urgency ---- */
+  --crimson-50:  #fdecef;
+  --crimson-100: #fad1d9;
+  --crimson-200: #f3a6b5;
+  --crimson-300: #ea7890;
+  --crimson-400: #de4f6c;
+  --crimson-500: #c83c57; /* heart-illustration glow */
+  --crimson-600: #a82f47;
+  --crimson-700: #86243a;
+  --crimson-800: #641b2b;
+  --crimson-900: #43121d;
+
+  /* ---- Navy — ink, headings & body copy on light surfaces ---- */
+  --navy-950: #0f1530;
+  --navy-900: #131a37; /* wordmark ink */
+  --navy-800: #1e2749;
+  --navy-700: #2c3760;
+  --navy-600: #3d4b7c;
+  --navy-500: #525f97;
+  --navy-400: #7580b0;
+  --navy-300: #9ca5c7;
+  --navy-200: #c4cae0;
+  --navy-100: #e4e7f2;
+  --navy-50:  #f3f4fa;
+
+  /* ---- Neutrals — warm paper grays ---- */
+  --neutral-0:   #ffffff;
+  --neutral-50:  #f7f5f5; /* notebook paper white */
+  --neutral-100: #edeaea;
+  --neutral-200: #dbd5d5; /* grid rule lines */
+  --neutral-300: #c2baba;
+  --neutral-400: #a6a4a5; /* placeholder / disabled */
+  --neutral-500: #8a8688;
+  --neutral-600: #6e6a6c;
+  --neutral-700: #524e50;
+  --neutral-800: #383536;
+  --neutral-900: #201e1f;
+
+  /* ================= Semantic aliases ================= */
+
+  /* Surfaces */
+  --surface-page:      var(--neutral-50);
+  --surface-card:      var(--neutral-0);
+  --surface-sunken:    var(--neutral-100);
+  --surface-dark:      var(--wine-800);
+  --surface-dark-alt:  var(--wine-900);
+  --surface-inverse:   var(--navy-900);
+
+  /* Text */
+  --text-primary:      var(--navy-900);
+  --text-secondary:    var(--neutral-600);
+  --text-muted:        var(--neutral-500);
+  --text-inverse:      var(--neutral-0);
+  --text-inverse-muted: var(--navy-200);
+  --text-link:         var(--teal-700);
+  --text-link-hover:   var(--teal-800);
+  --text-emergency:    var(--crimson-600);
+
+  /* Accents */
+  --accent-primary:        var(--teal-500);
+  --accent-primary-hover:  var(--teal-600);
+  --accent-primary-active: var(--teal-700);
+  --accent-emergency:        var(--crimson-500);
+  --accent-emergency-hover:  var(--crimson-600);
+  --accent-emergency-active: var(--crimson-700);
+
+  /* Borders */
+  --border-subtle:  var(--neutral-200);
+  --border-strong:  var(--neutral-400);
+  --border-dark:    var(--wine-700);
+  --border-focus:   var(--teal-400);
+
+  /* Feedback */
+  --state-success: #1f8f5a;
+  --state-warning: #c8802c;
+  --state-danger:  var(--crimson-600);
+  --state-info:    var(--teal-600);
+}

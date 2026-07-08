@@ -1,0 +1,9 @@
+# Arquivos locais que NÃO fazem parte do site estático publicado
+uploads/
+screenshots/
+.thumbnail
+node_modules/
+.DS_Store
+Thumbs.db
+.vercel/
+*.zip
